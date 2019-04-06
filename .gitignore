@@ -1,0 +1,4 @@
+#Node modules
+/AppServer/node_modules
+#Potential idea packages
+.idea/
