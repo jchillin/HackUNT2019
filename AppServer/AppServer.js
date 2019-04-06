@@ -1,7 +1,6 @@
 var http = require('http');
 var express = require('express');
 var bodyParser = require('body-parser');
-var fs = require('fs');
 var request = require('request')
 var app = express();
 const port = 8000;
