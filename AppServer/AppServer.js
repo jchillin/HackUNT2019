@@ -33,31 +33,23 @@ app.use(bodyParser.urlencoded({
 app.post('/addShelter',function(req,res){
   let message = req.body.shelter;
   
-  if(database.shelters[message.name.toLowerCase()])
-  {   
-    res.status(200).send("Sorry, that shelter already exists");
-  }
-  else{
-    database.shelters[message.name.toLowerCase()] = { lat:message.lat, long:message.long };
+    database.shelters.push({name:message.name, coord:{ lat:message.coord.lat, long:message.coord.long }});
     res.send("Success");
-  }
 })
 
 app.get('/getShelter', function (req, res) {
-  res.send(database);
+  res.send(database.shelters);
 })
-/*
-app.post('/helpLocation',function(req,res){
+
+app.get('/getPersons', function (req, res) {
+  res.send(database.persons);
+})
+
+app.post('/postPersons',function(req,res){
   let message = req.body;
-  if(database.locations[message.name.toLowerCase()])
-  {   
-    res.status(200).send("Sorry, that shelter already exists");
-  }
-  else{
-    database.shelters[message.name.toLowerCase()] = { lat:message.lat, long:message.long };
-    res.send("Success");
-  }
+  database.persons.push({ name:message.name, lat:message.lat, long:message.long });
+  res.send("Success");
 })
-*/
+
 
 app.listen(port, () => console.log('Listening on port ' + port))
