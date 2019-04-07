@@ -3,6 +3,7 @@ var bodyParser = require('body-parser');
 var app = express();
 var fs = require('fs');
 const port = 8000;
+var database = require("./Database.json");
 var minutes = 5, the_interval = minutes * 60 * 1000;
 //var seconds = 10, the_interval = seconds * 1000;
 setInterval(function() {
@@ -45,5 +46,18 @@ app.post('/addShelter',function(req,res){
 app.get('/getShelter', function (req, res) {
   res.send(database);
 })
+/*
+app.post('/helpLocation',function(req,res){
+  let message = req.body;
+  if(database.locations[message.name.toLowerCase()])
+  {   
+    res.status(200).send("Sorry, that shelter already exists");
+  }
+  else{
+    database.shelters[message.name.toLowerCase()] = { lat:message.lat, long:message.long };
+    res.send("Success");
+  }
+})
+*/
 
 app.listen(port, () => console.log('Listening on port ' + port))
